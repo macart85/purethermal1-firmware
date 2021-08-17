@@ -60,11 +60,18 @@ static void set_lepton_type()
 static void set_startup_defaults()
 {
   LEP_RESULT result;
+  LEP_RESULT result_gain;
 
   /* set a default color lut so radiometric parts produce reasonable pseudocolor images */
   result = LEP_SetVidPcolorLut(&hport_desc, PSUEDOCOLOR_LUT);
   if (result != LEP_OK) {
     DEBUG_PRINTF("Could not set default color lut: %d\r\n", result);
+  }
+
+  /* set gain to low by default*/
+  result_gain = LEP_SetSysGainMode(&hport_desc, LEP_SYS_GAIN_MODE_LOW);
+  if (result_gain != LEP_OK) {
+    DEBUG_PRINTF("Could not set gain to low: %d\r\n", result_gain);
   }
 }
 
